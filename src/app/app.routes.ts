@@ -1,6 +1,8 @@
-import { Resolve, Routes } from '@angular/router';
+import { ActivatedRoute, Resolve, Routes } from '@angular/router';
 
-class DataResolver implements Resolve<any> {
+export class DataResolver implements Resolve<any> {
+  constructor(private route: ActivatedRoute) {}
+
   resolve() {
     console.log('test');
     return [1, 2, 3, 4, 5];
@@ -15,7 +17,7 @@ export const routes: Routes = [
   },
   {
     path: 'data',
-    resolve: DataResolver,
+    resolve: { data: DataResolver },
     loadComponent: () => import('./data.component'),
   },
 ];
